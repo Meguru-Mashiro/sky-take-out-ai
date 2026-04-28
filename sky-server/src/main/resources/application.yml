@@ -1,0 +1,83 @@
+server:
+  port: 8080
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+knife4j:
+  enable: true
+spring:
+  cache:
+    type: redis
+  profiles:
+    active: dev
+  main:
+    allow-circular-references: true
+  datasource:
+    druid:
+      driver-class-name: ${sky.datasource.driver-class-name}
+      url: jdbc:mysql://${sky.datasource.host}:${sky.datasource.port}/${sky.datasource.database}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+      username: ${sky.datasource.username}
+      password: ${sky.datasource.password}
+  data:
+     redis:
+      host: ${sky.redis.host}
+      port: ${sky.redis.port}
+      password: ${sky.redis.password}
+      database: ${sky.redis.database}
+  rabbitmq:
+    host: ${sky.rabbitmq.host}
+    port: ${sky.rabbitmq.port}
+    username: ${sky.rabbitmq.username}
+    password: ${sky.rabbitmq.password}
+    virtual-host: ${sky.rabbitmq.virtual-host}
+    listener:
+      simple:
+        acknowledge-mode: ${sky.rabbitmq.listener.acknowledge-mode}
+        prefetch: ${sky.rabbitmq.listener.prefetch}
+  ai:
+    dashscope:
+      api-key: ${sky.ai.api-key}
+      chat:
+        options:
+          model: qwen-plus
+          temperature: 0.8
+
+mybatis:
+  #mapper配置文件
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.sky.entity
+  configuration:
+    #开启驼峰命名
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    com:
+      sky:
+        mapper: debug
+        service: info
+        controller: info
+
+sky:
+  jwt:
+    # 设置jwt签名加密时使用的秘钥
+    admin-secret-key: itcast-itcast-itcast-itcast-itcast-itc
+    # 设置jwt过期时间
+    admin-ttl: 7200000
+    # 设置前端传递过来的令牌名称
+    admin-token-name: token
+    user-secret-key: itheima-itheima-itheima-itheima-itheima-it
+    user-ttl: 7200000
+    user-token-name: authentication
+  minio:
+    endpoint: ${sky.minio.endpoint}
+    access-key: ${sky.minio.access-key}
+    secret-key: ${sky.minio.secret-key}
+    bucket-name: ${sky.minio.bucket-name}
+  wechat:
+    appid: ${sky.wechat.appid}
+    secret: ${sky.wechat.secret}
+  tencent :
+    key: JKCBZ-N4LLQ-MAF5L-4BGUB-IOIR2-WBBXO
+  shop:
+    address: 湖南省长沙市岳麓区中南大学岳麓山校区

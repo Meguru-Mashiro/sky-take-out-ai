@@ -1,0 +1,33 @@
+sky:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    host: localhost
+    port: 3306
+    database: sky_take_out
+    username: root
+    password: 7581
+  minio:
+    endpoint: http://127.0.0.1:9080
+    access-key: root
+    secret-key: password
+    bucket-name: sky-take-out
+  redis:
+    host: localhost
+    port: 6379
+    password: 7581
+    database: 10
+  wechat:
+    appid: wx17cf5fc003b43d93
+    secret: 0746d4983f2c65b854629873e689ac59
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+    listener:
+      acknowledge-mode: manual
+      prefetch: 1
+    order-timeout: 900000
+  ai:
+    api-key: sk-87cd3e6527fc471482b837e1e29352a8
