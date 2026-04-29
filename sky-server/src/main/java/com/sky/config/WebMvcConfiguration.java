@@ -33,7 +33,9 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
                 .excludePathPatterns("/swagger-ui/**")
                 .excludePathPatterns("/v3/api-docs/**")
                 .excludePathPatterns("/swagger-resources/**")
-                .excludePathPatterns("/admin/ai/**");
+                .excludePathPatterns("admin/test/**")
+                .excludePathPatterns("/admin/ai/**")
+                .excludePathPatterns("/admin/comment/**");
         registry.addInterceptor(jwtTokenUserInterceptor)
                 .addPathPatterns("/user/**")
                 .excludePathPatterns("/user/user/login")
@@ -42,7 +44,9 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
                 .excludePathPatterns("/webjars/**")
                 .excludePathPatterns("/swagger-ui/**")
                 .excludePathPatterns("/v3/api-docs/**")
-                .excludePathPatterns("/swagger-resources/**");
+                .excludePathPatterns("/swagger-resources/**")
+                .excludePathPatterns("/user/test/**")
+                .excludePathPatterns("/user/comment/**");
     }
 
     @Override
