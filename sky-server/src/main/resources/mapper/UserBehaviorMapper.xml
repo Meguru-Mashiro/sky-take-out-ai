@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sky.mapper.UserBehaviorMapper">
+
+    <insert id="insert" parameterType="com.sky.entity.UserBehavior">
+        INSERT INTO user_behavior (user_id, dish_id, category_id, behavior_type, behavior_time)
+        VALUES (#{userId}, #{dishId}, #{categoryId}, #{behaviorType}, #{behaviorTime})
+    </insert>
+
+    <select id="selectByCategories" resultType="java.lang.Long">
+        SELECT d.id
+        FROM dish d
+        LEFT JOIN user_behavior ub ON d.id = ub.dish_id
+        WHERE d.category_id IN
+        <foreach collection="categoryIds" item="categoryId" open="(" separator="," close=")">
+            #{categoryId}
+        </foreach>
+        AND d.status = 1
+        GROUP BY d.id
+        ORDER BY COUNT(ub.id) DESC, d.create_time DESC
+        LIMIT #{limit}
+    </select>
+
+    <select id="selectComboDishes" resultType="java.lang.Long">
+        SELECT od.dish_id
+        FROM order_detail od
+                 INNER JOIN orders o ON od.order_id = o.id
+                 INNER JOIN user_behavior ub ON o.user_id = ub.user_id
+        WHERE ub.dish_id = #{dishId}
+          AND od.dish_id != #{dishId}
+        GROUP BY od.dish_id
+        ORDER BY COUNT(*) DESC
+            LIMIT #{limit}
+    </select>
+
+</mapper>
